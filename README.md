@@ -6,6 +6,7 @@ Play with a friend in a clean and responsive interface.
 <br><hr>
 
 ## 🚀 Features
+
 - 🧑‍🤝‍🧑 Two-player mode (X vs O)<br>
 - 🎯 Automatic win detection<br>
 - 🔄 Reset / Restart button<br>
@@ -15,6 +16,7 @@ Play with a friend in a clean and responsive interface.
 <br><hr>
 
 ## 🛠️ Technologies Used
+
 - HTML<br>
 - CSS<br>
 - JavaScript<br>
@@ -22,16 +24,20 @@ Play with a friend in a clean and responsive interface.
 <br><hr>
 
 ## 📂 Project Structure
+
 <pre>
 tic-tac-toe/
 │── index.html
 │── style.css
 │── script.js
+│── LICENSE
+│── README.md
 </pre>
 
 <br><hr>
 
 ## ▶️ How to Play
+
 1. Player X starts the game<br>
 2. Players take turns clicking empty cells<br>
 3. First to get 3 in a row wins<br>
@@ -40,11 +46,13 @@ tic-tac-toe/
 <br><hr>
 
 ## 📸 Screenshot
+
 <img src="screenshot.png" width="400">
 
 <br><hr>
 
 ## ⚙️ Installation
+
 <pre>
 git clone https://github.com/your-username/tic-tac-toe.git
 </pre>
@@ -54,11 +62,13 @@ Open <code>index.html</code> in your browser.
 <br><hr>
 
 ## 🌐 Live Demo
+
 https://your-username.github.io/tic-tac-toe/
 
 <br><hr>
 
 ## 📌 Future Improvements
+
 - 🤖 Add AI (vs computer)<br>
 - 🔊 Sound effects<br>
 - 🌙 Dark mode<br>
@@ -67,5 +77,6 @@ https://your-username.github.io/tic-tac-toe/
 <br><hr>
 
 ## 👨‍💻 Author
+
 <b>Sahil</b><br>
 CSE Student
