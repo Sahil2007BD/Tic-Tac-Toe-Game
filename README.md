@@ -1,22 +1,33 @@
+<div align="center">
+
 # 🎮 Tic Tac Toe Game
 
-A simple and interactive Tic Tac Toe game built using <b>HTML, CSS, and JavaScript</b>.<br>
+<img src="https://img.shields.io/github/stars/Sahil2007BD/tic-tac-toe?style=for-the-badge">
+<img src="https://img.shields.io/github/license/Sahil2007BD/tic-tac-toe?style=for-the-badge">
+
+<br><br>
+
+<b>A simple and interactive Tic Tac Toe game built using HTML, CSS, and JavaScript.</b><br>
 Play with a friend in a clean and responsive interface.
+
+<br><br>
+
+<img src="preview.gif" width="500">
+
+</div>
 
 <br><hr>
 
 ## 🚀 Features
-
 - 🧑‍🤝‍🧑 Two-player mode (X vs O)<br>
 - 🎯 Automatic win detection<br>
 - 🔄 Reset / Restart button<br>
-- 📱 Responsive design (mobile + desktop)<br>
-- 🎨 Simple and clean UI<br>
+- 📱 Responsive design<br>
+- 🎨 Clean UI<br>
 
 <br><hr>
 
 ## 🛠️ Technologies Used
-
 - HTML<br>
 - CSS<br>
 - JavaScript<br>
@@ -24,37 +35,26 @@ Play with a friend in a clean and responsive interface.
 <br><hr>
 
 ## 📂 Project Structure
-
 <pre>
 tic-tac-toe/
 │── index.html
 │── style.css
 │── script.js
-│── LICENSE
-│── README.md
 </pre>
 
 <br><hr>
 
 ## ▶️ How to Play
-
 1. Player X starts the game<br>
-2. Players take turns clicking empty cells<br>
+2. Players take turns<br>
 3. First to get 3 in a row wins<br>
-4. Press <b>Reset</b> to play again<br>
-
-<br><hr>
-
-## 📸 Screenshot
-
-<img src="screenshot.png" width="400">
+4. Click <b>Reset</b> to play again<br>
 
 <br><hr>
 
 ## ⚙️ Installation
-
 <pre>
-git clone https://github.com/your-username/tic-tac-toe.git
+git clone https://github.com/Sahil2007BD/tic-tac-toe.git
 </pre>
 
 Open <code>index.html</code> in your browser.
@@ -62,21 +62,22 @@ Open <code>index.html</code> in your browser.
 <br><hr>
 
 ## 🌐 Live Demo
-
-https://your-username.github.io/tic-tac-toe/
+<a href="https://sahil2007bd.github.io/Tic-Tac-Toe-Game/">Click Here to Play</a>
 
 <br><hr>
 
 ## 📌 Future Improvements
-
-- 🤖 Add AI (vs computer)<br>
+- 🤖 AI opponent<br>
 - 🔊 Sound effects<br>
 - 🌙 Dark mode<br>
 - 🏆 Score tracking<br>
 
 <br><hr>
 
-## 👨‍💻 Author
+<div align="center">
 
+## 👨‍💻 Author
 <b>Sahil</b><br>
 CSE Student
+
+</div>
