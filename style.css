@@ -15,6 +15,7 @@ hr {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap; 
+    position: relative; /* For absolute positioning of winning line */
 }
 
 
@@ -44,3 +45,45 @@ hr {
     color: red;
 }
 
+/* Dark Mode */
+.dark {
+    background-color: #121212;
+    color: white;
+}
+
+.dark #board .tile {
+    border-color: white;
+}
+
+.dark .horizontal-line {
+    border-bottom: 3px solid white;
+}
+
+.dark .vertical-line {
+    border-right: 3px solid white;
+}
+
+#darkModeToggle {
+    margin-bottom: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+/* Winning Line */
+.line {
+    position: absolute;
+    height: 5px;
+    background: red;
+    transform-origin: left;
+    animation: draw 0.5s ease forwards;
+    z-index: 10;
+}
+
+@keyframes draw {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+#board {
+    position: relative; /* IMPORTANT */
+}
