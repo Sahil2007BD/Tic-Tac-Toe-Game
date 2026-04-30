@@ -21,10 +21,13 @@ function setGame() {
         [' ', ' ', ' ']
     ];
 
+    currPlayer = playerO;
+    gameOver = false;
+
     document.getElementById("status").innerText = "Current Turn: " + currPlayer;
 
     const boardDiv = document.getElementById("board");
-    boardDiv.innerHTML = ""; // IMPORTANT FIX (prevents stacking tiles)
+    boardDiv.innerHTML = "";
 
     for (let r = 0; r < 3; r++) {
         for (let c = 0; c < 3; c++) {
@@ -32,12 +35,7 @@ function setGame() {
             tile.id = r + "-" + c;
             tile.classList.add("tile");
 
-            if (r < 2) tile.classList.add("horizontal-line");
-            if (c < 2) tile.classList.add("vertical-line");
-
-            tile.innerText = "";
             tile.addEventListener("click", setTile);
-
             boardDiv.appendChild(tile);
         }
     }
@@ -51,11 +49,12 @@ function setTile() {
     if (board[r][c] !== ' ') return;
 
     board[r][c] = currPlayer;
-    this.innerText = currPlayer;
+    this.innerHTML = `<span>${currPlayer}</span>`;
 
     if (checkWinner()) {
         document.getElementById("status").innerText = "Winner: " + currPlayer;
         gameOver = true;
+        launchConfetti();
         return;
     }
 
@@ -71,9 +70,9 @@ function setTile() {
 
 function checkWinner() {
     for (let r = 0; r < 3; r++) {
-        if (board[r][0] === board[r][1] &&
-            board[r][1] === board[r][2] &&
-            board[r][0] !== ' ') {
+        if (board[r][0] !== ' ' &&
+            board[r][0] === board[r][1] &&
+            board[r][1] === board[r][2]) {
             highlight(r, 0, r, 1, r, 2);
             drawLine("row", r);
             return true;
@@ -81,26 +80,26 @@ function checkWinner() {
     }
 
     for (let c = 0; c < 3; c++) {
-        if (board[0][c] === board[1][c] &&
-            board[1][c] === board[2][c] &&
-            board[0][c] !== ' ') {
+        if (board[0][c] !== ' ' &&
+            board[0][c] === board[1][c] &&
+            board[1][c] === board[2][c]) {
             highlight(0, c, 1, c, 2, c);
             drawLine("col", c);
             return true;
         }
     }
 
-    if (board[0][0] === board[1][1] &&
-        board[1][1] === board[2][2] &&
-        board[0][0] !== ' ') {
+    if (board[0][0] !== ' ' &&
+        board[0][0] === board[1][1] &&
+        board[1][1] === board[2][2]) {
         highlight(0, 0, 1, 1, 2, 2);
         drawLine("diag");
         return true;
     }
 
-    if (board[0][2] === board[1][1] &&
-        board[1][1] === board[2][0] &&
-        board[0][2] !== ' ') {
+    if (board[0][2] !== ' ' &&
+        board[0][2] === board[1][1] &&
+        board[1][1] === board[2][0]) {
         highlight(0, 2, 1, 1, 2, 0);
         drawLine("anti");
         return true;
@@ -120,71 +119,86 @@ function checkDraw() {
 }
 
 /* =========================
-   FIXED DRAW LINE (IMPORTANT)
+   WINNING LINE
    ========================= */
 
 function drawLine(type, index) {
+    const boardEl = document.getElementById("board");
+
+    let startTile, endTile;
+
+    if (type === "row") {
+        startTile = document.getElementById(`${index}-0`);
+        endTile = document.getElementById(`${index}-2`);
+    }
+
+    if (type === "col") {
+        startTile = document.getElementById(`0-${index}`);
+        endTile = document.getElementById(`2-${index}`);
+    }
+
+    if (type === "diag") {
+        startTile = document.getElementById(`0-0`);
+        endTile = document.getElementById(`2-2`);
+    }
+
+    if (type === "anti") {
+        startTile = document.getElementById(`0-2`);
+        endTile = document.getElementById(`2-0`);
+    }
+
+    const boardRect = boardEl.getBoundingClientRect();
+    const startRect = startTile.getBoundingClientRect();
+    const endRect = endTile.getBoundingClientRect();
+
+    const x1 = startRect.left + startRect.width / 2 - boardRect.left;
+    const y1 = startRect.top + startRect.height / 2 - boardRect.top;
+
+    const x2 = endRect.left + endRect.width / 2 - boardRect.left;
+    const y2 = endRect.top + endRect.height / 2 - boardRect.top;
+
     const line = document.createElement("div");
     line.classList.add("line");
 
-    const boardEl = document.getElementById("board");
-    const rect = boardEl.getBoundingClientRect();
-
-    const size = rect.width;
-    const cell = size / 3;
-
-    let x1, y1, x2, y2;
-
-    // ROWS
-    if (type === "row") {
-        x1 = 0;
-        x2 = size;
-        y1 = y2 = cell * index + cell / 2;
-    }
-
-    // COLUMNS
-    if (type === "col") {
-        y1 = 0;
-        y2 = size;
-        x1 = x2 = cell * index + cell / 2;
-    }
-
-    // DIAGONAL \
-    if (type === "diag") {
-        x1 = 0;
-        y1 = 0;
-        x2 = size;
-        y2 = size;
-    }
-
-    // DIAGONAL /
-    if (type === "anti") {
-        x1 = size;
-        y1 = 0;
-        x2 = 0;
-        y2 = size;
-    }
-
-    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    const length = Math.hypot(x2 - x1, y2 - y1);
     const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
 
-    line.style.position = "absolute";
-    line.style.height = "5px";
     line.style.width = length + "px";
-    line.style.background = "red";
-
     line.style.left = x1 + "px";
     line.style.top = y1 + "px";
-
-    line.style.transformOrigin = "0 50%";
     line.style.transform = `rotate(${angle}deg)`;
 
     boardEl.appendChild(line);
 }
+
+/* =========================
+   RESET
+   ========================= */
 
 function resetGame() {
     document.getElementById("board").innerHTML = "";
     currPlayer = playerO;
     gameOver = false;
     setGame();
+}
+
+/* =========================
+   CONFETTI
+   ========================= */
+
+function launchConfetti() {
+    const colors = ["#ff4d4d", "#4f46e5", "#22c55e", "#f59e0b", "#06b6d4"];
+
+    for (let i = 0; i < 60; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = (Math.random() * 1 + 1.5) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+    }
 }
