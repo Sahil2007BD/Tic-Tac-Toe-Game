@@ -26,8 +26,20 @@ window.addEventListener("click", unlockAudio, { once: true });
 window.onload = function () {
     setGame();
 
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+    }
+
     document.getElementById("darkModeToggle").addEventListener("click", () => {
         document.body.classList.toggle("dark");
+
+        // Save preference
+        if (document.body.classList.contains("dark")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.setItem("theme", "light");
+        }
     });
 
     document.getElementById("reset").addEventListener("click", resetGame);
