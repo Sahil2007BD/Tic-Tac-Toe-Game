@@ -2,8 +2,8 @@
 
 # 🎮 Tic Tac Toe Game
 
-<img src="https://img.shields.io/github/stars/Sahil2007BD/tic-tac-toe?style=for-the-badge">
-<img src="https://img.shields.io/github/license/Sahil2007BD/tic-tac-toe?style=for-the-badge">
+<img src="https://img.shields.io/github/stars/Sahil2007BD/Tic-Tac-Toe-Game?style=for-the-badge">
+<img src="https://img.shields.io/github/license/Sahil2007BD/Tic-Tac-Toe-Game?style=for-the-badge">
 
 <br><br>
 
