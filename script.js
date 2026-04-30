@@ -13,6 +13,16 @@ clickSound.volume = 0.4;
 winSound.volume = 0.7;
 drawSound.volume = 0.7;
 
+
+function unlockAudio() {
+    clickSound.play().then(() => {
+        clickSound.pause();
+        clickSound.currentTime = 0;
+    });
+}
+
+window.addEventListener("click", unlockAudio, { once: true });
+
 window.onload = function () {
     setGame();
 
