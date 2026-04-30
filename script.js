@@ -4,6 +4,15 @@ var playerX = "X";
 var currPlayer = playerO;
 var gameOver = false;
 
+/* 🔊 SOUND SETUP */
+var clickSound = new Audio("click.mp3");
+var winSound = new Audio("win.mp3");
+var drawSound = new Audio("draw.mp3");
+
+clickSound.volume = 0.4;
+winSound.volume = 0.7;
+drawSound.volume = 0.7;
+
 window.onload = function () {
     setGame();
 
@@ -49,11 +58,21 @@ function setTile() {
     if (board[r][c] !== ' ') return;
 
     board[r][c] = currPlayer;
+
+    /* 🔊 CLICK SOUND */
+    clickSound.currentTime = 0;
+    clickSound.play();
+
     this.innerHTML = `<span>${currPlayer}</span>`;
 
     if (checkWinner()) {
         document.getElementById("status").innerText = "Winner: " + currPlayer;
         gameOver = true;
+
+        /* 🔊 WIN SOUND */
+        winSound.currentTime = 0;
+        winSound.play();
+
         launchConfetti();
         return;
     }
@@ -61,6 +80,11 @@ function setTile() {
     if (checkDraw()) {
         document.getElementById("status").innerText = "It's a Draw!";
         gameOver = true;
+
+        /* 🔊 DRAW SOUND */
+        drawSound.currentTime = 0;
+        drawSound.play();
+
         return;
     }
 
@@ -176,10 +200,7 @@ function drawLine(type, index) {
    ========================= */
 
 function resetGame() {
-    document.getElementById("board").innerHTML = "";
-    currPlayer = playerO;
-    gameOver = false;
-    setGame();
+    location.reload();
 }
 
 /* =========================
